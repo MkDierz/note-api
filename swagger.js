@@ -1,14 +1,10 @@
 const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
-//   components: {
-//     securitySchemes: {
-//       bearerAuth: {
-//         type: 'http',
-//         scheme: 'bearer',
-//       },
-//     },
-//   },
+  info: {
+    title: 'Note API',
+  },
+  host: 'localhost:3000/api',
   securityDefinitions: {
     bearerAuth: {
       type: 'apiKey',

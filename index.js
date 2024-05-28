@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-app.use('/', authRouter);
-app.use('/', noteRouter);
+app.use('/api', authRouter);
+app.use('/api', noteRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

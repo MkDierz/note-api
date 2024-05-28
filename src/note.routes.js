@@ -1,6 +1,8 @@
 const { PrismaClient } = require('@prisma/client');
 const { Router } = require('express');
+const { body } = require('express-validator');
 const { checkToken } = require('../utils/middleware');
+const errorHandler = require('../utils/errorHandler');
 
 const prisma = new PrismaClient();
 const router = new Router();
@@ -11,9 +13,10 @@ async function GetAllCheklist(req, res) {
   #swagger.tags = ['Checklist']
   #swagger.security = [{"bearerAuth": []}]
   */
-  return res.send(await prisma.cheklist.findMany({
+  const data = await prisma.cheklist.findMany({
     where: { userId: req.auth.id },
-  }));
+  });
+  return res.send(data);
 }
 
 async function CreateNewCheklist(req, res) {
@@ -29,13 +32,13 @@ async function CreateNewCheklist(req, res) {
   #swagger.security = [{"bearerAuth": []}]
   */
   const { name } = req.body;
-  await prisma.cheklist.create({
+  const data = await prisma.cheklist.create({
     data: {
       name,
       userId: req.auth.id,
     },
   });
-  return res.send();
+  return res.send(data);
 }
 
 async function DeleteCheklist(req, res) {
@@ -185,13 +188,16 @@ async function RenameItemByCheclistItemId(req, res) {
   return res.send(data);
 }
 
+const cheklistField = body('name').isString().notEmpty().withMessage('name is required');
+const cheklistItemField = body('name').isString().notEmpty().withMessage('name is required');
+
 router.get('/checklist', GetAllCheklist);
-router.post('/checklist', CreateNewCheklist);
+router.post('/checklist', cheklistField, errorHandler.validation, CreateNewCheklist);
 router.delete('/checklist/:checklistId', DeleteCheklist);
 router.get('/checklist/:checklistId/item', GetAllChecklistItemByChecklistId);
-router.post('/checklist/:checklistId/item', CreateNewChecklistItemInChecklist);
+router.post('/checklist/:checklistId/item', cheklistItemField, errorHandler.validation, CreateNewChecklistItemInChecklist);
 router.get('/checklist/:checklistId/item/:checklistItemId', GetChecklistItemInChecklistByChecklistId);
-router.put('/checklist/:checklistId/item/:checklistItemId', UpdateStatusChecklistItemByChecklistItemId);
+router.put('/checklist/:checklistId/item/:checklistItemId', cheklistItemField, errorHandler.validation, UpdateStatusChecklistItemByChecklistItemId);
 router.delete('/checklist/:checklistId/item/:checklistItemId', DeleteItemByChecklistItemId);
 router.put('/checklist/:checklistId/item/rename/:checklistItemId', RenameItemByCheclistItemId);
 
