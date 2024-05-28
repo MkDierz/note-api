@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Note REST API",
     "version": "1.0.0",
+    "title": "REST API",
     "description": ""
   },
   "host": "localhost:3000",
@@ -10,6 +10,14 @@
   "schemes": [
     "http"
   ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization",
+      "description": "JWT Token"
+    }
+  },
   "paths": {
     "/register": {
       "post": {
@@ -154,6 +162,9 @@
     },
     "/checklist": {
       "get": {
+        "tags": [
+          "Checklist"
+        ],
         "description": "",
         "parameters": [
           {
@@ -177,6 +188,9 @@
         ]
       },
       "post": {
+        "tags": [
+          "Checklist"
+        ],
         "description": "",
         "parameters": [
           {
@@ -219,6 +233,9 @@
     },
     "/checklist/{checklistId}": {
       "delete": {
+        "tags": [
+          "Checklist"
+        ],
         "description": "",
         "parameters": [
           {
@@ -250,6 +267,9 @@
     },
     "/checklist/{checklistId}/item": {
       "get": {
+        "tags": [
+          "Checklist Item"
+        ],
         "description": "",
         "parameters": [
           {
@@ -279,6 +299,9 @@
         ]
       },
       "post": {
+        "tags": [
+          "Checklist Item"
+        ],
         "description": "",
         "parameters": [
           {
@@ -327,6 +350,9 @@
     },
     "/checklist/{checklistId}/item/{checklistItemId}": {
       "get": {
+        "tags": [
+          "Checklist Item"
+        ],
         "description": "",
         "parameters": [
           {
@@ -362,6 +388,9 @@
         ]
       },
       "put": {
+        "tags": [
+          "Checklist Item"
+        ],
         "description": "",
         "parameters": [
           {
@@ -397,6 +426,9 @@
         ]
       },
       "delete": {
+        "tags": [
+          "Checklist Item"
+        ],
         "description": "",
         "parameters": [
           {
@@ -434,6 +466,9 @@
     },
     "/checklist/{checklistId}/item/rename/{checklistItemId}": {
       "put": {
+        "tags": [
+          "Checklist Item"
+        ],
         "description": "",
         "parameters": [
           {
@@ -484,14 +519,6 @@
             "bearerAuth": []
           }
         ]
-      }
-    }
-  },
-  "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
       }
     }
   }

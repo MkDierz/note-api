@@ -1,16 +1,20 @@
 const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
-  info: {
-    title: 'Note REST API',
-  },
-  host: 'localhost:3000',
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-      },
+//   components: {
+//     securitySchemes: {
+//       bearerAuth: {
+//         type: 'http',
+//         scheme: 'bearer',
+//       },
+//     },
+//   },
+  securityDefinitions: {
+    bearerAuth: {
+      type: 'apiKey',
+      in: 'header', // can be 'header', 'query' or 'cookie'
+      name: 'authorization', // name of the header, query parameter or cookie
+      description: 'JWT Token',
     },
   },
 };

@@ -8,6 +8,7 @@ router.use(checkToken);
 
 async function GetAllCheklist(req, res) {
   /*
+  #swagger.tags = ['Checklist']
   #swagger.security = [{"bearerAuth": []}]
   */
   return res.send(await prisma.cheklist.findMany({
@@ -16,14 +17,16 @@ async function GetAllCheklist(req, res) {
 }
 
 async function CreateNewCheklist(req, res) {
-  /*  #swagger.parameters['body'] = {
-            in: 'body',
-            description: 'create new cheklist.',
-            schema: {
-                $name: 'cheklist name',
-            }
+  /*
+  #swagger.tags = ['Checklist']
+  #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'create new cheklist.',
+    schema: {
+      $name: 'cheklist name'
     }
-    #swagger.security = [{"bearerAuth": []}]
+  }
+  #swagger.security = [{"bearerAuth": []}]
   */
   const { name } = req.body;
   await prisma.cheklist.create({
@@ -37,6 +40,7 @@ async function CreateNewCheklist(req, res) {
 
 async function DeleteCheklist(req, res) {
   /*
+  #swagger.tags = ['Checklist']
   #swagger.security = [{"bearerAuth": []}]
   */
   const data = await prisma.cheklist.delete({
@@ -50,6 +54,7 @@ async function DeleteCheklist(req, res) {
 
 async function GetAllChecklistItemByChecklistId(req, res) {
   /*
+  #swagger.tags = ['Checklist Item']
   #swagger.security = [{"bearerAuth": []}]
   */
   const data = await prisma.cheklistItem.findMany({
@@ -65,14 +70,15 @@ async function GetAllChecklistItemByChecklistId(req, res) {
 
 async function CreateNewChecklistItemInChecklist(req, res) {
   /*
+  #swagger.tags = ['Checklist Item']
   #swagger.security = [{"bearerAuth": []}]
   #swagger.parameters['body'] = {
-            in: 'body',
-            description: 'create new cheklist item.',
-            schema: {
-                $itemName: 'cheklist name',
-            }
+    in: 'body',
+    description: 'create new cheklist item.',
+    schema: {
+      $itemName: 'cheklist name',
     }
+  }
   */
   const data = await prisma.cheklistItem.create({
     data: {
@@ -85,6 +91,7 @@ async function CreateNewChecklistItemInChecklist(req, res) {
 
 async function GetChecklistItemInChecklistByChecklistId(req, res) {
   /*
+  #swagger.tags = ['Checklist Item']
   #swagger.security = [{"bearerAuth": []}]
   */
   const {
@@ -103,6 +110,7 @@ async function GetChecklistItemInChecklistByChecklistId(req, res) {
 
 async function UpdateStatusChecklistItemByChecklistItemId(req, res) {
   /*
+  #swagger.tags = ['Checklist Item']
   #swagger.security = [{"bearerAuth": []}]
   */
   const {
@@ -128,6 +136,7 @@ async function UpdateStatusChecklistItemByChecklistItemId(req, res) {
 
 async function DeleteItemByChecklistItemId(req, res) {
   /*
+  #swagger.tags = ['Checklist Item']
   #swagger.security = [{"bearerAuth": []}]
   */
   const {
@@ -148,6 +157,7 @@ async function DeleteItemByChecklistItemId(req, res) {
 
 async function RenameItemByCheclistItemId(req, res) {
   /*
+  #swagger.tags = ['Checklist Item']
   #swagger.security = [{"bearerAuth": []}]
   #swagger.parameters['body'] = {
             in: 'body',
