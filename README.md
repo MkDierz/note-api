@@ -18,17 +18,29 @@ These instructions will get you a copy of the project up and running on your loc
 git clone https://github.com/MkDierz/js-rest-api-prisma.git
 ```
 
-2. Install dependencies
+2. create env
 ```bash
-npm install
+DATABASE_URL="postgresql://postgres:username@password:5432/note-api?schema=public"
+TOKEN_SECRET=""
+TOKEN_AGE=""
+REFRESH_TOKEN_SECRET=""
+REFRESH_TOKEN_AGE=""
 ```
 
-3. Run the application
+3. Install dependencies and setup
+```bash
+npm install
+npx prisma migrate deploy 
+or 
+npx prisma db push
+```
+
+4. Run the application
 ```bash
 npm start
 ```
 
 For development, you can use:
 ```bash
-npm run start:dev
+npm run dev
 ```
